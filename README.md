@@ -1,59 +1,136 @@
-# Try
+# 📋 Bank Transaction Form Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.1.
+This is an Angular-based web application designed to simulate a complex internal banking form. The application demonstrates advanced form handling using **Reactive Forms**, **custom validators**, **FormArray**, and modular component architecture.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🎯 Project Purpose
+
+The goal of this project is to implement a sophisticated form interface that collects client data, banking details, and transaction information. It showcases Angular best practices in handling forms, validation, dynamic inputs, and responsive UI/UX.
+
+---
+
+## 🛠 Technologies Used
+
+- Angular CLI v17+
+- Angular Reactive Forms
+- TypeScript
+- Angular Material
+- Custom Form Validators
+- FormArray
+- CSS
+
+---
+
+## 🚀 Getting Started
+
+To run the application locally:
 
 ```bash
+git clone https://github.com/your-username/your-project.git
+cd angular-bank-form
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+🧱 Project Structure
+```
+src/
+└── app/
+    ├── components/
+    │   └── banking-form/
+    │       ├── banking-form.component.ts
+    │       ├── banking-form.component.html
+    │       └── banking-form.component.css
+    │
+    ├── image/
+    │   └── bank.ico
+    │
+    ├── validators/
+    │   └── custom-validators.ts
+    │
+    ├── app.component.ts
+    ├── app.config.ts
+    ├── app.css
+    ├── app.html
+    ├── app.routes.ts
+    ├── app.spec.ts
+    ├── app.ts
+    │
+    ├── index.html
+    ├── main.ts
+    └── styles.css
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+.editorconfig
+.gitignore
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📌 Form Sections
+The main form is divided into 5 logical sections:
+- 1. Client Information
+   First Name (required, 2-50 characters)
+   Last Name (required, 2-50 characters)
+   Middle Name (optional, if present: 2-50 characters)
+   Gender (dropdown: Male, Female)
+   Date of Birth (required, must be 18+)
+   Email (required, valid email format)
+   Phone Number (required, format: +7 (XXX) XXX-XX-XX)
+   Passport Series and Number (required, format: XXXX XXXXXX)
+- 2. Registration Address
+   Country (dropdown, required)
+   Region (required, min 3 characters)
+   City (required, min 3 characters)
+   Street (required, min 3 characters)
+   House Number (required, min 1 character)
+   Apartment (optional, digits only)
+   Postal Code (required, exactly 6 digits)
+- 3. Banking Details
+   Account Number (required, 20 digits)
+   Bank BIC (required, 9 digits)
+   Bank Name (required, min 3 characters)
+   Correspondent Account (required, 20 digits)
+- 4. Transaction Details
+   Transaction Type (dropdown: Transfer, Payment, Deposit)
+   Transaction Amount (required, > 0)
+   Currency (dropdown: RUB, USD, EUR)
+   Comment (optional, max 200 characters)
+- 5. Additional Documents (Dynamic - FormArray)
+   Each document entry includes:
+   Document Type (dropdown: Passport, SNILS, INN)
+   Document Number (required, digits only, length depends on type)
+   Issue Date (required, valid date)
+   Add and Remove buttons for dynamic control
+## ✅ Validation Rules
+   Built-in Validators: Validators.required, Validators.minLength, Validators.maxLength, Validators.pattern
+   Custom Validators:
+   Minimum age check (18+)
+   Phone number format validation
+   Passport series and number pattern
+   Banking fields length check
+   All validation errors are shown inline below each corresponding field.
+## ⚙️ Form Behavior
+   Submit button is disabled until the form is completely valid.
+   Error messages disappear once the user corrects the input.
+   Two control buttons:
+   Submit — logs form data to the console.
+   Reset — clears the entire form.
+## 🎨 UI/UX Design
+   Built with Angular Material components.
+   Responsive and accessible layout.
+   Form sections are visually separated using mat-card, mat-accordion, or similar UI elements.
+   Each field includes helpful tooltips or error hints where applicable.
 
-```bash
-ng generate --help
-```
+## 📚 References
+Angular Reactive Forms Guide: https://angular.io/guide/reactive-forms
 
-## Building
+Custom Validators: https://angular.io/guide/form-validation#custom-validators
 
-To build the project run:
+Angular Material: https://material.angular.io/
 
-```bash
-ng build
-```
+## 👨‍💻 Author
+Developer: [Bisiukou Timofey]
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Email: timbis17.208@gmail.com
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+GitHub: github.com/timataush

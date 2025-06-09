@@ -1,0 +1,315 @@
+<div class="form-container">
+  <form [formGroup]="bankingForm" (ngSubmit)="onSubmit()">
+
+<!--     Блок 1: Данные клиента -->
+    <div class="form-section">
+      <h3><i class="fas fa-user"></i> Данные клиента</h3>
+      <div formGroupName="clientData">
+        <div class="row">
+          <!-- Имя -->
+          <div class="col-md-4 mb-3">
+            <label for="firstName" class="form-label">Имя *</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('clientData.firstName')"
+                   id="firstName" formControlName="firstName" placeholder="Введите имя">
+            <div class="invalid-feedback">{{ getFieldError('clientData.firstName') }}</div>
+          </div>
+
+          <!-- Фамилия -->
+          <div class="col-md-4 mb-3">
+            <label for="lastName" class="form-label">Фамилия *</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('clientData.lastName')"
+                   id="lastName" formControlName="lastName" placeholder="Введите фамилию">
+            <div class="invalid-feedback">{{ getFieldError('clientData.lastName') }}</div>
+          </div>
+
+          <!-- Отчество -->
+          <div class="col-md-4 mb-3">
+            <label for="middleName" class="form-label">Отчество</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('clientData.middleName')"
+                   id="middleName" formControlName="middleName" placeholder="Введите отчество">
+            <div class="invalid-feedback">{{ getFieldError('clientData.middleName') }}</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Пол -->
+          <div class="col-md-3 mb-3">
+            <label for="gender" class="form-label">Пол *</label>
+            <select class="form-select" [class.is-invalid]="isFieldInvalid('clientData.gender')" id="gender"
+                    formControlName="gender">
+              <option value="">Выберите пол</option>
+              <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
+            </select>
+            <div class="invalid-feedback">{{ getFieldError('clientData.gender') }}</div>
+          </div>
+
+          <!-- Дата рождения -->
+          <div class="col-md-3 mb-3">
+            <label for="birthDate" class="form-label">Дата рождения *</label>
+            <input type="date" class="form-control" [class.is-invalid]="isFieldInvalid('clientData.birthDate')"
+                   id="birthDate" formControlName="birthDate">
+            <div class="invalid-feedback">{{ getFieldError('clientData.birthDate') }}</div>
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-3 mb-3">
+            <label for="email" class="form-label">Email *</label>
+            <input type="email" class="form-control" [class.is-invalid]="isFieldInvalid('clientData.email')" id="email"
+                   formControlName="email" placeholder="example@mail.ru">
+            <div class="invalid-feedback">{{ getFieldError('clientData.email') }}</div>
+          </div>
+
+          <!-- Телефон -->
+          <div class="col-md-3 mb-3">
+            <label for="phone" class="form-label">Телефон *</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('clientData.phone')" id="phone"
+                   formControlName="phone" (input)="onPhoneInput($event)" placeholder="+7 (XXX) XXX-XX-XX">
+            <div class="invalid-feedback">{{ getFieldError('clientData.phone') }}</div>
+          </div>
+        </div>
+
+        <!-- Паспорт -->
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="passport" class="form-label">Серия и номер паспорта *</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('clientData.passport')"
+                   id="passport" formControlName="passport" (input)="onPassportInput($event)" placeholder="XXXX XXXXXX">
+            <div class="invalid-feedback">{{ getFieldError('clientData.passport') }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Блок 2: Адрес регистрации -->
+    <div class="form-section">
+      <h3><i class="fas fa-map-marker-alt"></i> Адрес регистрации</h3>
+      <div formGroupName="address">
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label for="country" class="form-label">Страна *</label>
+            <select class="form-select" [class.is-invalid]="isFieldInvalid('address.country')" id="country"
+                    formControlName="country">
+              <option value="">Выберите страну</option>
+              <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+            </select>
+            <div class="invalid-feedback">{{ getFieldError('address.country') }}</div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <label for="region" class="form-label">Регион *</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('address.region')" id="region"
+                   formControlName="region" placeholder="Введите регион">
+            <div class="invalid-feedback">{{ getFieldError('address.region') }}</div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <label for="city" class="form-label">Город *</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('address.city')" id="city"
+                   formControlName="city" placeholder="Введите город">
+            <div class="invalid-feedback">{{ getFieldError('address.city') }}</div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <label for="street" class="form-label">Улица *</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('address.street')" id="street"
+                   formControlName="street" placeholder="Введите улицу">
+            <div class="invalid-feedback">{{ getFieldError('address.street') }}</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="house" class="form-label">Дом *</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('address.house')" id="house"
+                   formControlName="house" placeholder="Номер дома">
+            <div class="invalid-feedback">{{ getFieldError('address.house') }}</div>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label for="apartment" class="form-label">Квартира</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('address.apartment')"
+                   id="apartment" formControlName="apartment" placeholder="Номер квартиры">
+            <div class="invalid-feedback">{{ getFieldError('address.apartment') }}</div>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label for="postalCode" class="form-label">Индекс *</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('address.postalCode')"
+                   id="postalCode" formControlName="postalCode" placeholder="123456">
+            <div class="invalid-feedback">{{ getFieldError('address.postalCode') }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Блок 3: Банковские реквизиты -->
+    <div class="form-section">
+      <h3><i class="fas fa-university"></i> Банковские реквизиты</h3>
+      <div formGroupName="bankDetails">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="accountNumber" class="form-label">Номер счета *</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('bankDetails.accountNumber')"
+                   id="accountNumber" formControlName="accountNumber" placeholder="20 цифр">
+            <div class="invalid-feedback">{{ getFieldError('bankDetails.accountNumber') }}</div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="bik" class="form-label">БИК банка *</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('bankDetails.bik')" id="bik"
+                   formControlName="bik" placeholder="9 цифр">
+            <div class="invalid-feedback">{{ getFieldError('bankDetails.bik') }}</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="bankName" class="form-label">Наименование банка *</label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('bankDetails.bankName')"
+                   id="bankName" formControlName="bankName" placeholder="Введите название банка">
+            <div class="invalid-feedback">{{ getFieldError('bankDetails.bankName') }}</div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="correspondentAccount" class="form-label">Корреспондентский счет *</label>
+            <input type="text" class="form-control"
+                   [class.is-invalid]="isFieldInvalid('bankDetails.correspondentAccount')" id="correspondentAccount"
+                   formControlName="correspondentAccount" placeholder="20 цифр">
+            <div class="invalid-feedback">{{ getFieldError('bankDetails.correspondentAccount') }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Блок 4: Информация о транзакции -->
+    <div class="form-section">
+      <h3><i class="fas fa-exchange-alt"></i> Информация о транзакции</h3>
+      <div formGroupName="transactionInfo">
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label for="transactionType" class="form-label">Тип транзакции *</label>
+            <select class="form-select" [class.is-invalid]="isFieldInvalid('transactionInfo.transactionType')"
+                    id="transactionType" formControlName="transactionType">
+              <option value="">Выберите тип</option>
+              <option *ngFor="let type of transactionTypes" [value]="type">{{ type }}</option>
+            </select>
+            <div class="invalid-feedback">{{ getFieldError('transactionInfo.transactionType') }}</div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <label for="amount" class="form-label">Сумма транзакции *</label>
+            <input type="number" class="form-control" [class.is-invalid]="isFieldInvalid('transactionInfo.amount')"
+                   id="amount" formControlName="amount" step="0.01" min="0.01" placeholder="0.00">
+            <div class="invalid-feedback">{{ getFieldError('transactionInfo.amount') }}</div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <label for="currency" class="form-label">Валюта *</label>
+            <select class="form-select" [class.is-invalid]="isFieldInvalid('transactionInfo.currency')" id="currency"
+                    formControlName="currency">
+              <option value="">Выберите валюту</option>
+              <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+            </select>
+            <div class="invalid-feedback">{{ getFieldError('transactionInfo.currency') }}</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <label for="comment" class="form-label">Комментарий</label>
+            <textarea class="form-control" [class.is-invalid]="isFieldInvalid('transactionInfo.comment')" id="comment"
+                      formControlName="comment" rows="3"
+                      placeholder="Дополнительная информация о транзакции (максимум 200 символов)"></textarea>
+            <div class="invalid-feedback">{{ getFieldError('transactionInfo.comment') }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Блок 5: Дополнительные документы -->
+    <div class="form-section">
+      <h3><i class="fas fa-file-alt"></i> Дополнительные документы</h3>
+
+      <div class="mb-3">
+        <button type="button" class="btn btn-outline-primary" (click)="addDocument()">
+          <i class="fas fa-plus"></i> Добавить документ
+        </button>
+      </div>
+
+      <div formArrayName="documents">
+        <div *ngFor="let document of documentsArray.controls; let i = index" [formGroupName]="i" class="document-item">
+          <div class="document-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Документ {{ i + 1 }}</h5>
+            <button type="button" class="btn btn-sm btn-danger" (click)="removeDocument(i)">
+              <i class="fas fa-trash"></i> Удалить
+            </button>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Тип документа *</label>
+              <select class="form-select" formControlName="documentType"
+                      [class.is-invalid]="document.get('documentType')?.invalid && document.get('documentType')?.touched">
+                <option value="">Выберите тип</option>
+                <option *ngFor="let type of documentTypes" [value]="type">{{ type }}</option>
+              </select>
+              <div class="invalid-feedback" *ngIf="document.get('documentType')?.invalid && document.get('documentType')?.touched">
+                Выберите тип документа
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Номер документа *</label>
+              <input type="text" class="form-control" formControlName="documentNumber"
+                     [class.is-invalid]="document.get('documentNumber')?.invalid && document.get('documentNumber')?.touched"
+                     placeholder="Только цифры">
+              <div class="invalid-feedback" *ngIf="document.get('documentNumber')?.touched">
+                <span *ngIf="document.get('documentNumber')?.errors?.['required']">Введите номер документа</span>
+                <span *ngIf="document.get('documentNumber')?.errors?.['invalidDocumentNumber']">
+                  {{ getFieldError('documents.' + i + '.documentNumber') }}
+                </span>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Дата выдачи *</label>
+              <input type="date" class="form-control" formControlName="issueDate"
+                     [class.is-invalid]="document.get('issueDate')?.invalid && document.get('issueDate')?.touched">
+              <div class="invalid-feedback" *ngIf="document.get('issueDate')?.invalid && document.get('issueDate')?.touched">
+                Укажите дату выдачи документа
+              </div>
+            </div>
+
+            <div class="col-md-12 mb-3">
+              <label class="form-label">Прикрепить файл *</label>
+              <input type="file"
+                     class="form-control"
+                     (change)="onFileSelected($event, i)">
+              <div class="invalid-feedback" *ngIf="document.get('file')?.invalid && document.get('file')?.touched">
+                Файл обязателен для загрузки
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div *ngIf="documentsArray.length === 0" class="text-muted text-center py-4">
+          <i class="fas fa-file-plus fa-2x mb-2"></i>
+          <p>Документы не добавлены. Нажмите "Добавить документ" для добавления.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Кнопки -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary btn-lg" [disabled]="bankingForm.invalid">
+        <i class="fas fa-paper-plane"></i> Отправить
+      </button>
+      <button type="button" class="btn btn-secondary btn-lg" (click)="onClear()">
+        <i class="fas fa-eraser"></i> Очистить
+      </button>
+    </div>
+
+  </form>
+</div>
+
