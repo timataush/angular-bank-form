@@ -27,7 +27,7 @@ The goal of this project is to implement a sophisticated form interface that col
 To run the application locally:
 
 ```bash
-git clone https://github.com/your-username/your-project.git
+git clone https://github.com/timataush/angular-bank-form.git
 cd angular-bank-form
 npm install
 ng serve
